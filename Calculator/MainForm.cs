@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AngouriMath;
 
-namespace sdgfdsfg
+namespace Calculator
 {
     public partial class MainForm : Form
     {
@@ -81,11 +82,16 @@ namespace sdgfdsfg
             }
         }
 
+        
+
         private void button4_Click(object sender, EventArgs e)
         {
             try
             {
-                OutputTextbox.Text = MathS.FromString(InputTextbox.Text).Latexise();
+                string latex = MathS.FromString(InputTextbox.Text).Latexise();
+                OutputTextbox.Text = latex;
+                pictureBox1.Image = Latexer.RenderLatex(latex, pictureBox1.Width);
+
             }
             catch (Exception ex)
             {
@@ -139,6 +145,11 @@ namespace sdgfdsfg
                 button6_Click(null, null);
                 e.Handled = e.SuppressKeyPress = true;
             }
+        }
+
+        private void button27_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
